@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <h1><i class="fas fa-wallet"></i> Expense Tracker</h1>
+                <div class="profile-selector">
+                    <label for="profileSelect">Profile:</label>
+                    <select id="profileSelect" class="profile-select">
+                        <option value="personal">👤 Personal</option>
+                        <option value="work">💼 Work</option>
+                        <option value="other">📝 Other</option>
+                    </select>
+                    <button id="profileManageBtn" class="btn btn-icon" title="Manage Profiles">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="total-balance">
+                <span class="balance-label">Total Balance</span>
+                <span class="balance-amount" id="totalBalance">$0.00</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="add-expense-section">
+                <h2>Add New Expense</h2>
+                <form id="expenseForm" class="expense-form">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" id="description" name="description" placeholder="Enter expense description" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <input type="number" id="amount" name="amount" step="0.01" min="0" placeholder="0.00" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select id="category" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="food">🍽️ Food & Dining</option>
+                                <option value="transportation">🚗 Transportation</option>
+                                <option value="shopping">🛍️ Shopping</option>
+                                <option value="entertainment">🎬 Entertainment</option>
+                                <option value="bills">💡 Bills & Utilities</option>
+                                <option value="healthcare">🏥 Healthcare</option>
+                                <option value="education">📚 Education</option>
+                                <option value="other">📝 Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="account">Account</label>
+                            <select id="account" name="account" required>
+                                <option value="">Select Account</option>
+                                <option value="checking">🏦 Checking Account</option>
+                                <option value="savings">💰 Savings Account</option>
+                                <option value="credit-card">💳 Credit Card</option>
+                                <option value="debit-card">💳 Debit Card</option>
+                                <option value="cash">💵 Cash</option>
+                                <option value="paypal">📱 PayPal</option>
+                                <option value="venmo">📱 Venmo</option>
+                                <option value="zelle">📱 Zelle</option>
+                                <option value="apple-pay">📱 Apple Pay</option>
+                                <option value="google-pay">📱 Google Pay</option>
+                                <option value="other">📝 Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Expense
+                    </button>
+                </form>
+            </div>
+
+            <div class="expenses-section">
+                <div class="section-header">
+                    <h2>Expenses</h2>
+                    <div class="header-controls">
+                        <div class="filter-controls">
+                            <select id="categoryFilter" class="filter-select">
+                                <option value="">All Categories</option>
+                                <option value="food">🍽️ Food & Dining</option>
+                                <option value="transportation">🚗 Transportation</option>
+                                <option value="shopping">🛍️ Shopping</option>
+                                <option value="entertainment">🎬 Entertainment</option>
+                                <option value="bills">💡 Bills & Utilities</option>
+                                <option value="healthcare">🏥 Healthcare</option>
+                                <option value="education">📚 Education</option>
+                                <option value="other">📝 Other</option>
+                            </select>
+                            <select id="accountFilter" class="filter-select">
+                                <option value="">All Accounts</option>
+                                <option value="checking">🏦 Checking Account</option>
+                                <option value="savings">💰 Savings Account</option>
+                                <option value="credit-card">💳 Credit Card</option>
+                                <option value="debit-card">💳 Debit Card</option>
+                                <option value="cash">💵 Cash</option>
+                                <option value="paypal">📱 PayPal</option>
+                                <option value="venmo">📱 Venmo</option>
+                                <option value="zelle">📱 Zelle</option>
+                                <option value="apple-pay">📱 Apple Pay</option>
+                                <option value="google-pay">📱 Google Pay</option>
+                                <option value="other">📝 Other</option>
+                            </select>
+                            <input type="month" id="monthFilter" class="filter-select">
+                        </div>
+                        <div class="action-buttons">
+                            <button id="exportBtn" class="btn btn-secondary" title="Export expenses as CSV">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button id="clearAllBtn" class="btn btn-danger" title="Clear all expenses">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="expenses-summary">
+                    <div class="summary-card">
+                        <span class="summary-label">Total Expenses</span>
+                        <span class="summary-amount" id="totalExpenses">$0.00</span>
+                    </div>
+                    <div class="summary-card">
+                        <span class="summary-label">This Month</span>
+                        <span class="summary-amount" id="monthlyExpenses">$0.00</span>
+                    </div>
+                    <div class="summary-card">
+                        <span class="summary-label">Count</span>
+                        <span class="summary-amount" id="expenseCount">0</span>
+                    </div>
+                </div>
+                
+                <div class="account-summary">
+                    <h3>Spending by Account</h3>
+                    <div class="account-cards" id="accountSummary">
+                        <div class="empty-accounts">
+                            <i class="fas fa-wallet"></i>
+                            <p>No expenses yet</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="expenses-list" id="expensesList">
+                    <div class="empty-state">
+                        <i class="fas fa-receipt"></i>
+                        <p>No expenses yet. Add your first expense above!</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
